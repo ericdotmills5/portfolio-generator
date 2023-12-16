@@ -5,6 +5,8 @@ import scipy.stats as stats
 from scipy.optimize import fsolve, minimize
 
 PLOT_PNG_NAME = "sd-mu_plot.png"
+REPORT_NAME = "report.html"
+T_SCALE = 0.02
 
 def get_risk_param_and_money():
   '''
@@ -47,9 +49,9 @@ def get_risk_param_and_money():
     ss = input("Allow Short Selling (Y/N): ").strip().lower()
     match ss:
       case 'y':
-        return int_param * 0.02, float_money, True
+        return int_param * T_SCALE, float_money, True
       case 'n':
-        return int_param * 0.02, float_money, False
+        return int_param * T_SCALE, float_money, False
     print("Please type either 'Y' or 'N'")
     
 
@@ -70,7 +72,7 @@ def find_r_and_C(f_location):
   returns = np.array(returns)
 
   # calculate mean vector and covarience matrix
-  return np.mean(returns, axis=1), np.cov(returns)
+  return np.mean(returns, axis=1), np.cov(returns), stock_names
 
 def compute_coefficients(r, cov):
   '''
@@ -188,23 +190,98 @@ def plot_mu_sigma(a, b, d, mean, sd, r, cov):
   # user's portfolio
   plt.plot(sd, mean, 'kx', label="Q3 portfolio")
 
-  # minimum risk portfolio
-  plt.plot(a**-0.5, b/a, 'gx', label="Min Risk")
-
   plt.xlabel('σ - Risk')
   plt.ylabel('μ - Expected Return')
   plt.legend()
   plt.tight_layout()
   plt.savefig(PLOT_PNG_NAME)
 
+def create_abs_x(money, x):
+  '''
+  scales up return propotion vector by budget
+  '''
+  abs_x = []
+  for i in x:
+    abs_x.append(i * money)
+  return tuple(abs_x)
+
+def create_returns_string(abs_x, stock_names):
+  '''
+  turns the investment vector into a readable string for the html
+  '''
+  invest = ""
+  for i, amount in enumerate(abs_x):
+    invest += f"\t\t\t\t<p>{'Invest' if amount >= 0 else 'Shortsell'} ${abs(amount):.2f} into {stock_names[i]}</p>\n"
+  return invest
+
+def write_html(t, money, ss, abs_mean, abs_sd, stock_string):
+  '''
+  writes html with computed information
+  '''
+  to_write = f"""<!DOCTYPE html>
+<html>
+<head>
+  <title>Generated Portfolio Report</title>
+  <style>
+    .section {{
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 50px;
+    }}
+    .left {{
+      width: 65%;
+      text-align: left;
+    }}
+    .right {{
+      width: 30%;
+      text-align: right;
+    }}
+  </style>
+</head>
+<body>
+  <div class="section">
+    <div class="right">
+      <h2>Portfolio Specifications</h2>
+      <p>Risk aversion level: {round(t / T_SCALE)} out of 10 (t = {t})</p>
+      <p>Budget: ${money:.2f}</p>
+      <p>Short selling{" " if ss else " NOT "}ALLOWED</p>
+      
+      <h2>Portfolio statistics</h2>
+      <p>This portfolio has an expected return of: ${abs_mean:.2f} per day</p>
+      <p>This portfolio has risk: ${abs_sd:.2f}</p>
+
+      <h2>Optimal portfolio</h2>
+{stock_string}
+      
+    </div>
+    
+    <div class="left">
+      <h2>Plot of randomly generated portfolios</h2>
+    
+      <img src="sd-mu_plot.png" alt="Description of the image">
+    </div>
+
+  
+</body>
+</html>
+"""
+
+  f = open(REPORT_NAME, "w")
+  f.write(to_write)
+  f.close()
+
 
 def main():
   t, money, ss = get_risk_param_and_money()
-  r, cov = find_r_and_C('project_data.csv')
+  r, cov, stock_names = find_r_and_C('project_data.csv')
   a, b, c, d, e, alpha, beta, c_inv = compute_coefficients(r, cov)
   x = crit_line(t, r, cov, ss, alpha, beta, e)
   mean, sd = compute_mean_sd(x, r, cov)
+  abs_x = create_abs_x(money, x)
   plot_mu_sigma(a, b, d, mean, sd, r, cov)
+  stock_string = create_returns_string(abs_x, stock_names)
+  write_html(t, money, ss, mean * money, sd * money, stock_string)
+  print(mean, sd)
 
 if __name__ == "__main__":
   main()
