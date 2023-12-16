@@ -23,11 +23,11 @@ I am improving this project by working on:
 
 ## Usage
 
-1. Download some stock data with the following columns structure: Date, Stock 1, Stock 2, ... (in this order; no other columns) and rows as stock prices for each day; or just download "stock_prices.csv" above,
-2. Download "portfolio_generator.py" in the same directory as the formatted stock data,
-3. Navigate to the project directory and run: "python3 portfolio_generator.py".
+1. Download some stock data with the following columns structure: Date, Stock 1, Stock 2, ... (in this order; no other columns) and rows as stock prices for each day; or just download `stock_prices.csv` above,
+2. Download `portfolio_generator.py` in the same directory as the formatted stock data,
+3. Navigate to the project directory and type: `python3 portfolio_generator.py` into the terminal.
 
-If you do not wish to download this software, the sample stocks "stock_prices.csv" were used to create a sample report which you can read from "[report.html](https://ericdotmills5.github.io/portfolio-generator/)".
+If you do not wish to download this software, the sample stocks `stock_prices.csv` were used to create a sample report which you can read from [`report.html``](https://ericdotmills5.github.io/portfolio-generator/).
 
 ## Disclaimer
 This project is for educational purposes only. It should not be used for real-world investment decisions. The author of this project is not responsible for any financial losses.
