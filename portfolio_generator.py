@@ -8,7 +8,7 @@ from typing import Tuple
 np.seterr(invalid='ignore')
 
 PLOT_PNG_NAME = "sd-mu_plot.png"
-REPORT_NAME = "report.html"
+REPORT_NAME = "index.html"
 T_SCALE = 0.035
 STOCKS_CSV_NAME = "stock_prices.csv"
 SIGMA_GRAPH_RANGE = 0.025
