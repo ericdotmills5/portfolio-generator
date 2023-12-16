@@ -7,7 +7,7 @@ This project uses [Markowitz's Modern Portfolio Theory](https://en.wikipedia.org
 
 - Takes user's risk tolerance level, budget, and short selling preference as input
 - Generates a portfolio that maximizes expected return for a given level of risk
-- Outputs a report with portfolio specifications, statistics, the optimal portfolio, and a graphical interpretation of the portfolio
+- Outputs a html report with portfolio specifications, statistics, the optimal portfolio, and a graphical interpretation of the portfolio
 
 ## Requirements
 
@@ -17,7 +17,7 @@ This project uses [Markowitz's Modern Portfolio Theory](https://en.wikipedia.org
 
 ## Usage
 
-1. Download some stock data with columns: Date, Stock 1, Stock 2, ... (in this order; no other columns) and rows as stock prices for each day; or just download "stock_prices.csv" above.
+1. Download some stock data with the following columns structure: Date, Stock 1, Stock 2, ... (in this order; no other columns) and rows as stock prices for each day; or just download "stock_prices.csv" above.
 2. Download "portfolio_generator.py" in the same directory as the formatted stock data
 3. Navigate to the project directory and run: "python3 portfolio_generator.py"
 
