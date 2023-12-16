@@ -1,8 +1,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import scipy.stats as stats
-from scipy.optimize import fsolve, minimize
+from scipy.optimize import minimize
 from typing import Tuple
 
 np.seterr(invalid='ignore')
@@ -299,6 +298,7 @@ def main() -> None:
   plot_mu_sigma(a, b, d, mean, sd, r, cov, ss)
   stock_string = create_returns_string(abs_x, stock_names)
   write_html(t, money, ss, mean * money, sd * money, stock_string)
+  print("Please open index.html to see the generated portfolio!")
 
 if __name__ == "__main__":
   main()
