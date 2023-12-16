@@ -1,13 +1,13 @@
 
 # Portfolio Generator
 
-This project uses Markowitz's Modern Portfolio Theory to generate an optimal portfolio given a set of stocks. I used it to better my knowledge in functional programing with python and to explore the scipy, numpy, and matplotlib librarys. I was motivated to write this as an assignment for my portfolio optimisation and financial mathematics unit [MATH2070](https://www.sydney.edu.au/units/MATH2070), which I recieved full marks for. Among all of MPT's assumptions, this program assumes that stock data is normally distributed.
+This project uses [Markowitz's Modern Portfolio Theory](https://en.wikipedia.org/wiki/Modern_portfolio_theory) (MPT) to generate an optimal portfolio given a set of stocks. I used it to better my knowledge in functional programing with python and to explore the scipy, numpy, and matplotlib librarys. I was motivated to write this as an assignment for my portfolio optimisation and financial mathematics unit [MATH2070](https://www.sydney.edu.au/units/MATH2070), which I recieved full marks for. Among all of MPT's assumptions, this program assumes that stock data is normally distributed.
 
 ## Features
 
 - Takes user's risk tolerance level, budget, and short selling preference as input
 - Generates a portfolio that maximizes expected return for a given level of risk
-- Outputs a report with portfolio specifications, statistics, and the optimal portfolio
+- Outputs a report with portfolio specifications, statistics, the optimal portfolio, and a graphical interpretation of the portfolio
 
 ## Requirements
 
