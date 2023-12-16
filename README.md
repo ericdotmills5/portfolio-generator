@@ -21,6 +21,6 @@ This project uses [Markowitz's Modern Portfolio Theory](https://en.wikipedia.org
 2. Download "portfolio_generator.py" in the same directory as the formatted stock data
 3. Navigate to the project directory and run: "python3 portfolio_generator.py"
 
-Disclaimer
+## Disclaimer
 This project is for educational purposes only. It should not be used for real-world investment decisions. The author of this project is not responsible for any financial losses.
 
